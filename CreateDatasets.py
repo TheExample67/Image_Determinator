@@ -6,13 +6,23 @@ import cv2
 from tqdm import tqdm
 import random
 import pickle
+import json
 
 DATADIR = "data"
 SOURCEDIR = "source"
-CATEGORIES = ["cats", "dogs"]
+CATEGORIES = []
 training_data = []
 IMG_SIZE = 50
 plotStuff = False
+
+with open("data\SourceData.json","r") as Source:
+    datastore = json.load(Source)
+    ToChecks = datastore["CheckData"]
+    for ToCheck in ToChecks:
+        CATEGORIES.append(ToCheck["type"])
+        pass
+    
+
 
 print("Loading Categories..")
 def create_training_data():
