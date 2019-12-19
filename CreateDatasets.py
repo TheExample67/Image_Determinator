@@ -40,6 +40,8 @@ def create_training_data():
                 pass
 
 create_training_data()
+
+#Switch around the data
 random.shuffle(training_data)
 
 X = []
@@ -48,6 +50,8 @@ y = []
 for features,label in training_data:
     X.append(features)
     y.append(label)
+
+print(X[0].reshape(-1, IMG_SIZE, IMG_SIZE, 1))
 
 X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 
