@@ -1,0 +1,12 @@
+{
+    "CheckData":[
+        {
+            "type": "cats",
+            "URL": "https://pixabay.com/de/images/search/katzen/?pagi={0}"
+        },
+        {
+            "type":"dogs",
+            "URL": "https://pixabay.com/de/images/search/hunde/?pagi={0}"
+        }
+    ]
+}
