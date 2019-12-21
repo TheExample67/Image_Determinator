@@ -3,11 +3,13 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+import tarfile
 
-DATADIR ="source"
+DATADIR ="data"
+SOURCEDIR = "source"
 ToChecks = []
 NumberOfSiteToCheck = 10
-with open( DATADIR +"\SourceData.json","r") as Source:
+with open("SourceData.json","r") as Source:
     datastore = json.load(Source)
     ToChecks = datastore["SearchWebsite"]
 
@@ -15,7 +17,7 @@ i = 1
 for ToCheck in ToChecks:
     searchValues = ToCheck["searchTags"]
     for searchValue in searchValues:
-        directory = os.path.join(DATADIR,searchValue)
+        directory = os.path.join(SOURCEDIR,searchValue)
 
         try:
             os.stat(directory)
@@ -39,4 +41,12 @@ for ToCheck in ToChecks:
                         with open(directory + "\img_{0}.jpg".format(str(i)), "wb") as img_file:
                             img_file.write(img_data)
                 i += 1
+
+
+def tardir(_SOURCEDIR, tar_name):
+    with tarfile.open(tar_name, "w:gz") as tar_handle:
+        for root, dirs, files in os.walk(_SOURCEDIR):
+            for file in files:
+                tar_handle.add(os.path.join(root, file))
+tardir(SOURCEDIR, DATADIR+'\sample.tar.gz')
 
